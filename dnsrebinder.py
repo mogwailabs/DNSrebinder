@@ -149,7 +149,7 @@ def main():
     parser.add_argument('--port', default=53, type=int, help='The port to listen on.')
     parser.add_argument('--tcp', action='store_true', help='Listen to TCP connections.')
     parser.add_argument('--udp', action='store_true', help='Listen to UDP datagrams.')
-    parser.add_argument('--domain', default=None, type=str, help='The domain to listen for')
+    parser.add_argument('--domain', default=None, type=str, help='The domain to listen for', required=True)
     parser.add_argument('--ttl', default=0, type=int, help='TTL value of DNS responses')
     parser.add_argument('--ip', default='8.8.8.8', help='IP Adress used to respond')
     parser.add_argument('--rebind', default='127.0.0.1', help='IP address for rebind')
