@@ -1,6 +1,40 @@
 # DNSrebinder
 
-DNSrebinder is a python script to run a DNS server. It is used to test for DNS rebinding attacks. 
+DNSrebinder is a minimal DNS server that can be used to test/verify DNS rebinding vulnerabilities. It is based on the Python DNS library (dnslib)[https://github.com/paulc/dnslib]. DNSrebinder allows you to define various settings on the command line, including the number of requests before the actual rebinding should occur.
+
+## Installation
+
+The recommended way is to use a Python virtual environment
+
+```
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+On systems that are using systemd, you need to temporary disable systemd-resolved as this service listen on port 53:
+
+```
+sudo systemctl stop systemd-resolved
+```
+To re-enable it
+
+```
+sudo systemctl start systemd-resolved
+```
+
+Please make sure that you have a DNS-NS record that points to the system that is running DNSrebinder.
+
+
+## Usage
+
+Example usage:
+```bash
+$ python3 dnsrebinder.py --domain rebind.mydomain.eu. --rebind 127.0.0.1 --ip 8.8.8.8 --counter 2
+...
+```
+
+This starts a DNS server on port 53 listening on UDP and TCP. The first two(--counter 2) requests will be answered with 8.8.8.8. Every request after that will be answered with the rebind address 127.0.0.1 (--rebind 127.0.0.1).
 
 Usage help:
 ```bash
@@ -23,10 +57,14 @@ optional arguments:
   --counter COUNTER  Number of requests before rebinding
 ```
 
-Example usage:
-```bash
-$ python3 dnsrebinder.py --domain ox-rebind.pwnhub.eu. --rebind 127.0.0.1 --ip 8.8.8.8 --counter 2
-...
-```
+## Contributing
 
-This starts a DNS server on port 53 listening on UDP and TCP. The first two(--counter 2) requests will be answered with 8.8.8.8. Every request after that will be answered with the rebind address 127.0.0.1 (--rebind 127.0.0.1).
+Feel free to contribute.
+
+## Authors
+* **Timo Müller** - *Original script* - [mtimo44](https://twitter.com/mtimo44)
+* **Hans-Martin Münch** - *Re-Write with dnslib* - [h0ng10](https://twitter.com/h0ng10)
+* **Karsten Zeides** - *Command line options, cleanup* [zeides](https://github.com/zeides)
+
+See also the list of [contributors](https://github.com/mogwailabs/DNSrebinder/graphs/contributors) who participated in this project.
+
