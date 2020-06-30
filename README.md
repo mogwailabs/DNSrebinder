@@ -1,6 +1,6 @@
 # DNSrebinder
 
-DNSrebinder is a minimal DNS server that can be used to test/verify DNS rebinding vulnerabilities. It is based on the Python DNS library (dnslib)[https://github.com/paulc/dnslib]. DNSrebinder allows you to define various settings on the command line, including the number of requests before the actual rebinding should occur.
+DNSrebinder is a minimal DNS server that can be used to test/verify DNS rebinding vulnerabilities. It is based on the Python DNS library [dnslib](https://github.com/paulc/dnslib). DNSrebinder allows you to define various settings on the command line, including the number of requests before the actual rebinding should occur.
 
 ## Installation
 
@@ -36,7 +36,7 @@ $ python3 dnsrebinder.py --domain rebind.mydomain.eu. --rebind 127.0.0.1 --ip 8.
 
 This starts a DNS server on port 53 listening on UDP and TCP. The first two(--counter 2) requests will be answered with 8.8.8.8. Every request after that will be answered with the rebind address 127.0.0.1 (--rebind 127.0.0.1).
 
-Usage help:
+Options overview:
 ```bash
 $ python3 dnsrebinder.py -h
 usage: dnsrebinder.py [-h] [--port PORT] [--tcp] [--udp] [--domain DOMAIN]
