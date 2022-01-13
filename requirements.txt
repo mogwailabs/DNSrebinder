@@ -1,2 +1,2 @@
 wheel==0.34.2
-dnslib==0.9.14
+dnslib==0.9.17
