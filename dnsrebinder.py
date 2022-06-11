@@ -151,6 +151,7 @@ def main():
     parser.add_argument('--udp', action='store_true', help='Listen to UDP datagrams.')
     parser.add_argument('--domain', default=None, type=str, help='The domain to listen for', required=True)
     parser.add_argument('--ttl', default=0, type=int, help='TTL value of DNS responses')
+    parser.add_argument('--bind', default='', type=str, help='IP Adress for server to listen on')
     parser.add_argument('--ip', default='8.8.8.8', help='IP Adress used to respond')
     parser.add_argument('--rebind', default='127.0.0.1', help='IP address for rebind')
     parser.add_argument('--counter', default=2, type=int, help='Number of requests before rebinding'), 
@@ -161,8 +162,8 @@ def main():
     print("Starting nameserver...")
 
     servers = []
-    if args.udp: servers.append(socketserver.ThreadingUDPServer(('', args.port), UDPRequestHandler))
-    if args.tcp: servers.append(socketserver.ThreadingTCPServer(('', args.port), TCPRequestHandler))
+    if args.udp: servers.append(socketserver.ThreadingUDPServer((args.bind, args.port), UDPRequestHandler))
+    if args.tcp: servers.append(socketserver.ThreadingTCPServer((args.bind, args.port), TCPRequestHandler))
 
     for s in servers:
         domain = args.domain if args.domain.endswith(".") else args.domain + "."
