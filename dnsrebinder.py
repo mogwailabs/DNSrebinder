@@ -121,7 +121,7 @@ class BaseRequestHandler(socketserver.BaseRequestHandler):
 class TCPRequestHandler(BaseRequestHandler):
 
     def get_data(self):
-        data = self.request.recv(8192).strip()
+        data = self.request.recv(8192)
         sz = struct.unpack('>H', data[:2])[0]
         if sz < len(data) - 2:
             raise Exception("Wrong size of TCP packet")
@@ -137,7 +137,7 @@ class TCPRequestHandler(BaseRequestHandler):
 class UDPRequestHandler(BaseRequestHandler):
 
     def get_data(self):
-        return self.request[0].strip()
+        return self.request[0]
 
     def send_data(self, data):
         return self.request[1].sendto(data, self.client_address)
