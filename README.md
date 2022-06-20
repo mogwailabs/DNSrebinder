@@ -52,6 +52,7 @@ optional arguments:
   --udp              Listen to UDP datagrams.
   --domain DOMAIN    The domain to listen for
   --ttl TTL          TTL value of DNS responses
+  --bind             IP Adress for server to listen on
   --ip IP            IP Adress used to respond
   --rebind REBIND    IP address for rebind
   --counter COUNTER  Number of requests before rebinding
