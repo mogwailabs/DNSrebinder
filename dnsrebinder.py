@@ -11,6 +11,7 @@ import socketserver
 import struct
 import datetime
 import random
+
 try:
     from dnslib import *
 except ImportError:
@@ -91,22 +92,10 @@ class DomainName(str):
 #     D.andrei: [CNAME(D)],
 # }
 
-def should_rebind(source_ip, hits, hits_max):
-    p = hits_max / 10.0
-    r = random.random()
 
-    if r < p:
-        return True
-    else:
-        return False
-    #if hits < hits_max:
-    #    return True
-    #else:
-    #    return False
-    #if (hits % 2) == 1:
-    #    return True
-    #else:
-    #    return False
+# Implement here different rebinding strategies
+def should_rebind(source_ip, hits, hits_max):
+    return hits >= hits_max
 
 
 last_time = None
